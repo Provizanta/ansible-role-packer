@@ -1,0 +1,20 @@
+---
+
+- name: establish pre-requisites
+  become: true
+  when: "(ansible_system | lower) != 'windows'"
+  package:
+    name: unzip
+    state: present
+  tags: install
+
+
+# from https://packer.io/downloads.html
+- name: establish (download) binary
+  become: true
+  unarchive:
+    src: https://releases.hashicorp.com/packer/{{ packer_version }}/packer_{{ packer_version }}_{{ ansible_system | lower }}_{{ packer_architecture }}.zip
+    dest: "{{ packer_binary_dir_path }}"
+    remote_src: true
+    creates: "{{ packer_binary_dir_path }}/packer"
+  tags: install

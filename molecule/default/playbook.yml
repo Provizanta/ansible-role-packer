@@ -1,0 +1,8 @@
+---
+
+- name: Converge
+  hosts: all
+  roles:
+    - role: packer
+      vars:
+        packer_binary_dir_path: /usr/bin
