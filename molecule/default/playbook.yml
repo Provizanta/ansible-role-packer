@@ -19,5 +19,5 @@
           register: r
         - name: evaluate file presence
           assert:
-            that: r.stdout == version
+            that: version in r.stdout
             fail_msg: "packer should be installed with a correct version"

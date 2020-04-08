@@ -8,9 +8,16 @@
     state: present
   tags: install
 
+- name: check packer existence
+  command: "packer --version"
+  register: v
+  changed_when: false
+  failed_when: false
+  tags: install
 
 # from https://packer.io/downloads.html
 - name: establish (download) binary
+  when: v['stdout'] is not defined or packer_version not in v.stdout
   become: true
   unarchive:
     src: https://releases.hashicorp.com/packer/{{ packer_version }}/packer_{{ packer_version }}_{{ ansible_system | lower }}_{{ packer_architecture }}.zip
