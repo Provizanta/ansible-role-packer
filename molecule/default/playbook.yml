@@ -5,7 +5,7 @@
   vars:
     version: '1.5.5'
   roles:
-    - role: packer
+    - role: ansible-role-packer
       vars:
         packer_version: "{{ version }}"
         packer_binary_dir_path: /usr/bin

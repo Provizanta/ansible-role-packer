@@ -1,7 +1,7 @@
 Ansible role: Packer
 =========
 
-[![Build Status](https://travis-ci.com/Provizanta/ansible-role-packer.svg?branch=master)](https://travis-ci.com/Provizanta/ansible-role-packer)
+![Build & Deploy](https://github.com/Provizanta/ansible-role-packer/workflows/molecule/badge.svg?branch=master)
 
 Establish and configure Packer.
 
