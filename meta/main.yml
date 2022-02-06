@@ -2,6 +2,7 @@
 
 galaxy_info:
   role_name: packer
+  namespace: provizanta
   author: Tibor Csoka
   description: |
     "Establish and configure Packer."
