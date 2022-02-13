@@ -1,0 +1,11 @@
+---
+
+- name: Converge
+  hosts: all
+  vars:
+    version: '1.5.5'
+  roles:
+    - role: ansible-role-packer
+      vars:
+        packer_version: "{{ version }}"
+        packer_architecture: amd64

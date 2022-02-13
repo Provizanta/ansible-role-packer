@@ -3,5 +3,3 @@
 packer_architecture: 'amd64'    # enum, one of 386|amd64|arm|arm64|mips|mips64|mipsle|ppc64le|s390x
 
 packer_version: '1.5.5'
-
-packer_binary_dir_path: "/usr/local/bin"

@@ -1,0 +1,10 @@
+---
+
+- name: Verify
+  hosts: all
+  tasks:
+    - name: packer should be installed
+      block:
+        - name: check that packer exists
+          command: 'packer --version'
+          changed_when: false

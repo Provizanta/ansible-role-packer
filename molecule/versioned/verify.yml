@@ -1,0 +1,14 @@
+---
+
+- name: Verify
+  hosts: all
+  vars:
+    version: '1.5.5'
+  tasks:
+    - name: packer should be installed
+      block:
+        - name: check packer version
+          command: 'packer --version'
+          changed_when: false
+          register: r
+          failed_when: not version in r.stdout
