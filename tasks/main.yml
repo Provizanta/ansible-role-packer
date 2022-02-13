@@ -2,7 +2,9 @@
 
 - name: establish pre-requisites
   become: true
-  when: "(ansible_system | lower) != 'windows'"
+  when:
+    - "(ansible_system | lower) != 'windows'"
+    - packer_version is defined
   package:
     name: unzip
     state: present
@@ -15,13 +17,20 @@
   failed_when: false
   tags: install
 
-# from https://packer.io/downloads.html
-- name: establish (download) binary
-  when: v['stdout'] is not defined or packer_version not in v.stdout
+- name: establish explicit version
+  when:
+    - packer_version is defined
+    - v['stdout'] is not defined or packer_version not in v.stdout
   become: true
   unarchive:
-    src: https://releases.hashicorp.com/packer/{{ packer_version }}/packer_{{ packer_version }}_{{ ansible_system | lower }}_{{ packer_architecture }}.zip
+    src: https://releases.hashicorp.com/packer/{{ packer_version }}/packer_{{ packer_version }}_{{ ansible_system | lower }}_{{ packer_architecture | default('amd64') }}.zip
     dest: "{{ packer_binary_dir_path }}"
     remote_src: true
     creates: "{{ packer_binary_dir_path }}/packer"
+  tags: install
+
+# https://www.packer.io/downloads
+- name: install package
+  when: not packer_version is defined
+  include_tasks: "{{ ansible_os_family }}.yml"
   tags: install

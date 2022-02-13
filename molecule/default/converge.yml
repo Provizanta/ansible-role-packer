@@ -2,22 +2,5 @@
 
 - name: Converge
   hosts: all
-  vars:
-    version: '1.5.5'
   roles:
     - role: ansible-role-packer
-      vars:
-        packer_version: "{{ version }}"
-        packer_binary_dir_path: /usr/bin
-
-  post_tasks:
-    - name: packer should be installed
-      block:
-        - name: check packer version
-          command: '/usr/bin/packer --version'
-          changed_when: false
-          register: r
-        - name: evaluate file presence
-          assert:
-            that: version in r.stdout
-            fail_msg: "packer should be installed with a correct version"

@@ -5,5 +5,5 @@ ignore: |
   .github/
 rules:
   line-length:
-    max: 160
+    max: 185
 level: warning
